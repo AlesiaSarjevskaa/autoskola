@@ -7,16 +7,12 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-const dogsRouter = require('./routes/dogs');
-const catsRouter = require('./routes/cats');
-const policeOfficersRouter = require('./routes/policeOfficers');
-const policeStationsRouter = require('./routes/policeStations');
+const applicationsRouter = require('./routes/applications');
 
 var app = express();
 
 mongoose
-.connect("mongodb+srv://admin:adminadmin@cluster0.olo13ku.mongodb.net/programovanicvika?appName=Cluster0")
+.connect(process.env.MONGODB_URI || "mongodb+srv://admin:adminadmin@cluster0.olo13ku.mongodb.net/programovanicvika?appName=Cluster0")
 .then(() => console.log("Database connected"))
 .catch((err) => console.log(err));
 
@@ -32,11 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/dogs', dogsRouter);
-app.use('/cats', catsRouter);
-app.use('/policeOfficers', policeOfficersRouter);
-app.use('/policeStations', policeStationsRouter);
+app.use('/applications', applicationsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

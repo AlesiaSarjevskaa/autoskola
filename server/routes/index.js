@@ -3,8 +3,8 @@ const router = express.Router();
 
 
 router.get('/', (req, res, next) => {
-  res.send({
-    msg: "Hello world",
+  res.json({
+    msg: "Autoškola Jiří Jiráček API běží.",
   });
 });
 

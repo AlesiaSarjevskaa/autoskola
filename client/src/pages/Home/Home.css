@@ -1,146 +1,633 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;700;800&display=swap");
+
+:root {
+  --wine-950: #4b0f12;
+  --wine-900: #65161a;
+  --wine-800: #7b1b21;
+  --wine-700: #922228;
+  --sand-100: #f6eee5;
+  --sand-200: #e8d8ca;
+  --sand-300: #d6c1b0;
+  --ink-900: #1b1716;
+  --slate-600: #5f5b5b;
+  --shadow-lg: 0 22px 60px rgba(27, 23, 22, 0.28);
+  --shadow-md: 0 14px 40px rgba(27, 23, 22, 0.2);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  background-color: #6b1a1a;
-  color: white;
-  font-family: Arial, sans-serif;
+  font-family: "Manrope", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(184, 58, 64, 0.32), transparent 32%),
+    linear-gradient(180deg, #73181c 0%, #611418 38%, #521114 100%);
+  color: var(--sand-100);
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 50px;
-  border-bottom: 1px solid #8b2a2a;
+a {
+  color: inherit;
 }
 
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  margin-left: 20px;
-  text-transform: uppercase;
-  font-size: 13px;
-  font-weight: bold;
+.home-page {
+  min-height: 100vh;
 }
 
-.hero {
-  height: 300px;
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://placeholder.com');
-  background-size: cover;
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
   display: flex;
   align-items: center;
-  padding: 0 50px;
-}
-
-.hero h2 {
-  max-width: 400px;
-  font-size: 28px;
-}
-
-.search-bar {
-  padding: 5px 10px;
-  border-radius: 3px;
-  border: none;
-  width: 250px;
-}
-
-.main-layout {
-  display: flex;
-  max-width: 1100px;
-  margin: 40px auto;
-  gap: 50px;
-}
-
-.sidebar { width: 200px; }
-
-.menu-title {
-  border-bottom: 1px solid #a13a3a;
-  text-transform: uppercase;
-  padding-bottom: 5px;
-}
-
-.sidebar ul { list-style: none; padding: 0; font-size: 14px; line-height: 2; }
-
-.news-box {
-  background: #5a1515;
-  padding: 15px;
-  margin-top: 30px;
-  font-size: 12px;
-}
-
-.welcome-header {
-  display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  gap: 1.5rem;
+  padding: 1rem clamp(1rem, 2vw, 2.5rem);
+  background: rgba(75, 15, 18, 0.93);
+  border-bottom: 1px solid rgba(246, 238, 229, 0.14);
+  backdrop-filter: blur(12px);
 }
 
-.welcome-title {
-  font-size: 80px;
-  text-transform: uppercase;
-  margin: 0;
-  letter-spacing: -5px;
+.site-brand {
+  text-decoration: none;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.06em;
+  font-size: clamp(1.6rem, 2vw, 2.2rem);
+  white-space: nowrap;
 }
 
-.offer-badges {
+.site-nav {
   display: flex;
-  gap: 10px;
-  margin: 20px 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.65rem;
 }
 
-.offer-badges span {
-  background: #4d1212;
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-size: 12px;
-  border: 1px solid #8b2a2a;
+.nav-button-active {
+  background: rgba(246, 238, 229, 0.18);
+  border-color: rgba(246, 238, 229, 0.28);
+}
+
+.nav-button,
+.menu-list a,
+.service-tile,
+.primary-button,
+.secondary-button {
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.nav-button {
+  padding: 0.72rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(246, 238, 229, 0.12);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 800;
+  background: rgba(246, 238, 229, 0.04);
+}
+
+.nav-button:hover,
+.menu-list a:hover,
+.service-tile:hover,
+.primary-button:hover,
+.secondary-button:hover {
+  transform: translateY(-2px);
+}
+
+.hero-section {
+  position: relative;
+  min-height: 72vh;
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(2rem, 6vw, 5rem);
+  background-image:
+    linear-gradient(90deg, rgba(19, 15, 14, 0.82) 0%, rgba(19, 15, 14, 0.35) 58%, rgba(19, 15, 14, 0.1) 100%),
+    url("https://54619c6731.clvaw-cdnwnd.com/33f61c8f0cc0e235b62d12bc6172951e/200000000-4513c460a1/50000000.jpg?ph=54619c6731");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-section-compact {
+  min-height: 31rem;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(75, 15, 18, 0.22), rgba(75, 15, 18, 0.68)),
+    radial-gradient(circle at right center, rgba(246, 238, 229, 0.14), transparent 24%);
+}
+
+.hero-content {
+  position: relative;
+  max-width: 44rem;
+}
+
+.hero-kicker,
+.eyebrow {
+  margin: 0 0 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--sand-300);
+}
+
+.hero-content h1,
+.section-heading h2,
+.pricing-card h2,
+.signup-card h2,
+.site-footer h2 {
+  margin: 0;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.03em;
+}
+
+.hero-content h1 {
+  font-size: clamp(3.2rem, 7vw, 6rem);
+  line-height: 0.96;
+  max-width: 11ch;
+}
+
+.hero-text {
+  max-width: 34rem;
+  margin: 1rem 0 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(246, 238, 229, 0.9);
+}
+
+.hero-actions,
+.signup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.primary-button,
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.35rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.primary-button {
+  color: var(--wine-950);
+  background: var(--sand-100);
+}
+
+.secondary-button {
+  border: 1px solid rgba(246, 238, 229, 0.24);
+  background: rgba(246, 238, 229, 0.08);
+}
+
+.content-shell {
+  width: min(1280px, calc(100% - 2rem));
+  margin: -3.5rem auto 0;
+  display: grid;
+  grid-template-columns: minmax(250px, 300px) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+
+.content-shell-routed {
+  margin-top: 1.5rem;
+}
+
+.sidebar-panel,
+.welcome-card,
+.info-section,
+.detail-card,
+.gallery-section,
+.pricing-card,
+.signup-card {
+  border: 1px solid rgba(246, 238, 229, 0.08);
+  background: rgba(102, 22, 27, 0.9);
+  box-shadow: var(--shadow-md);
+}
+
+.sidebar-panel {
+  position: sticky;
+  top: 6.4rem;
+  border-radius: 2rem;
+  padding: 1.25rem;
+}
+
+.panel-block + .panel-block {
+  margin-top: 1.5rem;
+}
+
+.panel-title {
+  margin: 0 0 1rem;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.08em;
+}
+
+.menu-list,
+.news-list,
+.main-content,
+.price-list,
+.footer-contact {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.menu-list a {
+  display: block;
+  padding: 0.8rem 0.95rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  background: rgba(246, 238, 229, 0.06);
+  border: 1px solid transparent;
+  font-weight: 700;
+}
+
+.menu-list a:hover {
+  border-color: rgba(246, 238, 229, 0.18);
+}
+
+.menu-link-active {
+  border-color: rgba(246, 238, 229, 0.24);
+  background: rgba(246, 238, 229, 0.14) !important;
+}
+
+.news-card {
+  padding: 1rem;
+  border-radius: 1.15rem;
+  background: rgba(75, 15, 18, 0.72);
+}
+
+.news-date {
+  margin: 0 0 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--sand-300);
+}
+
+.news-card h3,
+.detail-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.news-card p,
+.detail-card p,
+.lead-text,
+.two-column-text p,
+.signup-card p,
+.footer-contact p {
+  margin: 0;
+  line-height: 1.72;
+  color: rgba(246, 238, 229, 0.92);
+}
+
+.main-content {
+  gap: 1.5rem;
+}
+
+.welcome-card,
+.info-section,
+.gallery-section,
+.pricing-card,
+.signup-card {
+  border-radius: 2rem;
+  padding: clamp(1.35rem, 3vw, 2rem);
+}
+
+.section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: end;
+  margin-bottom: 1rem;
+}
+
+.section-heading h2,
+.pricing-card h2,
+.signup-card h2,
+.site-footer h2 {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 0.95;
+}
+
+.heading-note {
+  margin: 0;
+  font-weight: 800;
+  color: var(--sand-300);
+}
+
+.lead-text {
+  font-size: 1.06rem;
+}
+
+.offer-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.4rem;
+}
+
+.offer-row span,
+.detail-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  background: rgba(75, 15, 18, 0.76);
+  border: 1px solid rgba(246, 238, 229, 0.1);
+  font-weight: 800;
+}
+
+.two-column-text {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
 }
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
 }
 
-.service-card {
-  background: #4d1212;
-  border-radius: 30px;
-  padding: 20px;
-  text-align: center;
-  border: 1px solid #3d0e0e;
+.service-tile {
+  min-height: 126px;
+  padding: 1.2rem;
+  border-radius: 1.6rem;
+  background:
+    linear-gradient(180deg, rgba(75, 15, 18, 0.92), rgba(103, 24, 29, 0.92)),
+    rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(246, 238, 229, 0.08);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.service-card strong { display: block; font-size: 18px; }
-.service-card span { font-size: 10px; text-transform: uppercase; opacity: 0.7; }
+.service-badge {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.06em;
+  color: var(--sand-100);
+}
 
-.gallery {
-  background: #5a1515;
-  padding: 40px;
-  text-align: center;
+.service-tile strong {
+  font-size: 1.05rem;
+}
+
+.service-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.detail-card {
+  border-radius: 1.6rem;
+  padding: 1.4rem;
+  scroll-margin-top: 7rem;
+}
+
+.detail-badge {
+  margin-bottom: 1rem;
+  color: var(--sand-100);
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
-  max-width: 1000px;
-  margin: 20px auto;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
 }
 
-.gallery-item { background: #888; aspect-ratio: 16/9; }
+.gallery-card {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: rgba(75, 15, 18, 0.65);
+}
 
-.footer {
-  background: #333;
-  padding: 40px;
+.gallery-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.gallery-card figcaption {
+  padding: 0.9rem 1rem 1rem;
+  font-size: 0.95rem;
+  color: var(--sand-200);
+}
+
+.pricing-signup {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.price-row {
   display: flex;
-  justify-content: center;
-  gap: 40px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1.15rem;
+  background: rgba(75, 15, 18, 0.72);
 }
 
-.avatar {
-  width: 70px;
-  height: 70px;
-  background: #666;
-  border-radius: 50%;
-  border: 2px solid white;
+.price-row span {
+  font-weight: 700;
 }
 
-.contact-info { font-size: 13px; line-height: 1.6; }
-.email { color: #ff6b6b; }
+.price-row strong {
+  font-size: 1.05rem;
+}
+
+.site-footer {
+  width: min(1280px, calc(100% - 2rem));
+  margin: 1.5rem auto 2rem;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border-radius: 2rem;
+  background: rgba(31, 28, 28, 0.86);
+  border: 1px solid rgba(246, 238, 229, 0.1);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.footer-contact a {
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--sand-100);
+}
+
+.detail-link {
+  display: inline-flex;
+  margin-top: 1rem;
+  text-decoration: none;
+  font-weight: 800;
+  color: var(--sand-100);
+}
+
+.contact-card {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1.2rem;
+  border-radius: 1.3rem;
+  background: rgba(75, 15, 18, 0.72);
+}
+
+.contact-card a {
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.button-reset:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.application-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.4rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.form-field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.form-field span,
+.checkbox-field span {
+  font-weight: 700;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(246, 238, 229, 0.14);
+  background: rgba(75, 15, 18, 0.75);
+  color: var(--sand-100);
+  font: inherit;
+}
+
+.form-field textarea {
+  resize: vertical;
+}
+
+.form-field-full {
+  grid-column: 1 / -1;
+}
+
+.checkbox-field {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.checkbox-field input {
+  margin-top: 0.25rem;
+}
+
+.form-message {
+  margin: 0;
+  padding: 0.95rem 1rem;
+  border-radius: 1rem;
+  font-weight: 700;
+}
+
+.form-message-success {
+  background: rgba(37, 136, 84, 0.22);
+  border: 1px solid rgba(94, 232, 157, 0.34);
+}
+
+.form-message-error {
+  background: rgba(177, 45, 45, 0.22);
+  border: 1px solid rgba(255, 122, 122, 0.34);
+}
+
+@media (max-width: 1080px) {
+  .content-shell {
+    grid-template-columns: 1fr;
+    margin-top: -2rem;
+  }
+
+  .sidebar-panel {
+    position: static;
+  }
+
+  .services-grid,
+  .gallery-grid,
+  .pricing-signup,
+  .service-details,
+  .two-column-text,
+  .form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .site-header,
+  .site-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-nav,
+  .hero-actions {
+    width: 100%;
+  }
+
+  .hero-content h1 {
+    max-width: 8ch;
+  }
+
+  .services-grid,
+  .gallery-grid,
+  .pricing-signup,
+  .service-details,
+  .two-column-text,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-button,
+  .primary-button,
+  .secondary-button {
+    width: 100%;
+  }
+}
