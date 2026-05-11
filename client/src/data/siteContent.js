@@ -1,3 +1,8 @@
+import imageAuto from "../assets/image_auto.png"
+import imageDite from "../assets/image_dite.png"
+import imageMotorka from "../assets/image_motorka.png"
+import imageStoly from "../assets/image_stoly.png"
+
 export const navigationItems = [
   { label: "Úvod", path: "/" },
   { label: "O nás", path: "/o-nas" },
@@ -78,20 +83,20 @@ export const priceItems = [
 
 export const galleryImages = [
   {
-    src: "../../assets/image_auto.png",
+    src: imageAuto,
     alt: "Osobní automobil",
   },
   {
-    src: "../../assets/image_motorka.png",
+    src: imageMotorka,
     alt: "Motocykly",
   },
   {
-    src: "../../assets/image_stoly.png",
+    src: imageStoly,
     alt: "Učebna autoškoly",
   },
   {
-    src: "https://../../assets/image_dite.png",
-    alt: "Jízda autem",
+    src: imageDite,
+    alt: "Hlavní vchod do autoškoly",
   },
 ]
 

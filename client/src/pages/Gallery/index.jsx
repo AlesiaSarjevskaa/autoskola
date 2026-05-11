@@ -4,9 +4,8 @@ import { galleryImages } from "../../data/siteContent"
 export default function GalleryPage() {
   return (
     <PageIntro
-      eyebrow="Fotografie"
-      title="Náhled atmosféry autoškoly"
-      note="Galerie vozidel, učebny a výuky"
+      eyebrow="Náhled atmosféry autoškoly"
+      title="Fotogalerie"
     >
       <div className="gallery-grid">
         {galleryImages.map((image) => (

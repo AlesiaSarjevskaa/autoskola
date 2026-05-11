@@ -6,9 +6,8 @@ export default function ServicesPage() {
   return (
     <>
       <PageIntro
-        eyebrow="Služby"
-        title="Vyberte si, co právě potřebujete"
-        note="Každé tlačítko má vlastní stránku"
+        eyebrow="Vyberte si, co právě potřebujete"
+        title="Naše služby"
       >
         <div className="services-grid">
           {serviceCards.map((service) => (

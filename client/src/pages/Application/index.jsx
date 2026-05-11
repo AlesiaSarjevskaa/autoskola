@@ -64,13 +64,11 @@ export default function ApplicationPage() {
 
   return (
     <PageIntro
-      eyebrow="Přihláška"
-      title="Začněte jednoduše"
-      note="Odeslání přímo do databáze"
+      eyebrow="Začněte jednoduše"
+      title="Přihláška"
     >
       <p className="lead-text">
-        Vyplňte základní údaje, vyberte kurz a odešlete přihlášku. Data se uloží
-        přímo do databáze autoškoly.
+        Vyplňte základní údaje, vyberte kurz a odešlete přihlášku.
       </p>
 
       <form className="application-form" onSubmit={handleSubmit}>

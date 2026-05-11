@@ -3,9 +3,8 @@ import PageIntro from "../shared/PageIntro"
 export default function AboutPage() {
   return (
     <PageIntro
-      eyebrow="O nás"
-      title="Výuka, která se přizpůsobí vám"
-      note="Teorie i praktické jízdy"
+      eyebrow="Výuka, která se přizpůsobí vám"
+      title="O nás"
     >
       <div className="two-column-text">
         <p>

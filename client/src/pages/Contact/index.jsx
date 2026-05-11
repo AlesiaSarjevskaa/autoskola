@@ -4,9 +4,8 @@ import { contactInfo } from "../../data/siteContent"
 export default function ContactPage() {
   return (
     <PageIntro
-      eyebrow="Kontakt"
-      title="Spojte se s námi"
-      note="Autoškola Jiří Jiráček"
+      eyebrow="Spojte se s námi"
+      title="Kontakty"
     >
       <div className="contact-card">
         <p>{contactInfo.address}</p>

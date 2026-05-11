@@ -4,9 +4,7 @@ import { newsItems } from "../../data/siteContent"
 export default function NewsPage() {
   return (
     <PageIntro
-      eyebrow="Novinky"
-      title="Aktuální termíny kurzů"
-      note="Přehled posledních oznámení"
+      title="Novinky"
     >
       <div className="news-list">
         {newsItems.map((item) => (

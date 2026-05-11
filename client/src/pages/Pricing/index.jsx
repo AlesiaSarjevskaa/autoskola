@@ -4,9 +4,7 @@ import { priceItems } from "../../data/siteContent"
 export default function PricingPage() {
   return (
     <PageIntro
-      eyebrow="Ceník"
-      title="Aktuální ceny"
-      note="Možnost domluvy a splátek"
+      title="Ceník"
     >
       <div className="price-list">
         {priceItems.map((item) => (
