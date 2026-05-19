@@ -1,23 +1,51 @@
+import { useState } from "react"
 import { NavLink, Outlet } from "react-router-dom"
 import { contactInfo, navigationItems, newsItems } from "../data/siteContent"
 import "../pages/Home/Home.css"
 
+const topNavigationItems = [
+  { label: "O nás", path: "/o-nas" },
+  { label: "Ceník", path: "/cenik" },
+  { label: "Přihláška", path: "/prihlaska", isHighlighted: true },
+  { label: "Kontakty", path: "/kontakt" },
+]
+
 export default function SiteLayout() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   return (
     <div className="home-page">
       <header className="site-header">
-        <NavLink className="site-brand" to="/">
+        <NavLink className="site-brand" to="/" onClick={() => setIsMenuOpen(false)}>
           AUTOŠKOLA JIŘÍ JIRÁČEK
         </NavLink>
 
-        <nav className="site-nav" aria-label="Hlavní navigace">
-          {navigationItems.map((item) => (
+        <button
+          className="menu-toggle"
+          type="button"
+          aria-expanded={isMenuOpen}
+          aria-label={isMenuOpen ? "Zavřít hlavní menu" : "Otevřít hlavní menu"}
+          onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
+        <nav
+          className={`site-nav${isMenuOpen ? " site-nav-open" : ""}`}
+          aria-label="Hlavní navigace"
+        >
+          {topNavigationItems.map((item) => (
             <NavLink
               key={item.path}
               className={({ isActive }) =>
-                `nav-button${isActive ? " nav-button-active" : ""}`
+                `nav-button${item.isHighlighted ? " nav-button-cta" : ""}${
+                  isActive ? " nav-button-active" : ""
+                }`
               }
               to={item.path}
+              onClick={() => setIsMenuOpen(false)}
             >
               {item.label}
             </NavLink>

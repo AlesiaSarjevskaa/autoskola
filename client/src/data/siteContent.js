@@ -62,22 +62,22 @@ export const serviceCards = [
   },
   {
     slug: "kondicni-jizdy",
-    badge: "Jízdy",
+    badge: "Kondiční jízdy",
     title: "Kondiční jízdy",
     text: "Kondiční jízdy jsou pro každého, kdo delší dobu neřídil, chce se zdokonalit nebo získat jistotu v dnešním hustém provozu. Počet i průběh hodin si určíte sami.",
   },
   {
     slug: "skoleni-ridicu",
-    badge: "Firma",
+    badge: "Školení řidičů",
     title: "Školení řidičů",
     text: "Autoškola zajišťuje profesní školení řidičů - referentů pro firmy, jejichž zaměstnanci jezdí služebními auty. Školení probíhá v rozsahu skupiny B.",
   },
 ]
 
 export const priceItems = [
-  { label: "AM, A1", price: "14 000 Kč" },
-  { label: "A2", price: "15 000 Kč" },
-  { label: "A", price: "16 000 Kč" },
+  { label: "AM, A1", price: "15 000 Kč" },
+  { label: "A2", price: "16 000 Kč" },
+  { label: "A", price: "17 000 Kč" },
   { label: "B", price: "20 000 Kč" },
 ]
 

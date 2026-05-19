@@ -1,61 +1,170 @@
-import { Link } from "react-router-dom"
-import PageIntro from "../shared/PageIntro"
-import { serviceCards } from "../../data/siteContent"
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+
+const homeServices = [
+  { slug: "osobni-automobily", badge: "B", title: "Osobní vozy", sub: "Skupina B" },
+  { slug: "male-motocykly", badge: "A1", title: "Lehké moto", sub: "do 125 ccm" },
+  { slug: "vetsi-motocykly", badge: "A2", title: "Střední moto", sub: "do 35 kW" },
+  { slug: "motocykly-bez-omezeni", badge: "A", title: "Moto bez omezení", sub: "Skupina A" },
+  { slug: "kondicni-jizdy", badge: "Kondiční jízdy", title: "Kondiční jízdy", sub: "Získejte jistotu" },
+  { slug: "skoleni-ridicu", badge: "Školení řidičů", title: "Školení", sub: "Referenti" },
+]
+
+const searchItems = [
+  { path: "/", terms: ["uvod", "vitejte", "autoskola", "domu"] },
+  { path: "/o-nas", terms: ["o nas", "onas", "informace", "autoskola jiracek"] },
+  { path: "/sluzby", terms: ["sluzby", "nabidka", "kurzy", "vycvik"] },
+  { path: "/fotografie", terms: ["fotografie", "foto", "galerie", "fotogalerie"] },
+  { path: "/kontakt", terms: ["kontakt", "kontakty", "telefon", "email", "adresa"] },
+  { path: "/cenik", terms: ["cenik", "cena", "ceny", "kolik", "platba"] },
+  { path: "/prihlaska", terms: ["prihlaska", "prihlasit", "formular", "zapsat"] },
+  { path: "/novinky", terms: ["novinky", "kurz", "termin", "terminy"] },
+  {
+    path: "/sluzby/osobni-automobily",
+    terms: ["b", "skupina b", "osobni", "auto", "automobil", "osobni vozy"],
+  },
+  {
+    path: "/sluzby/male-motocykly",
+    terms: ["a1", "skupina a1", "lehke moto", "125", "motocykl 125"],
+  },
+  {
+    path: "/sluzby/vetsi-motocykly",
+    terms: ["a2", "skupina a2", "stredni moto", "35 kw"],
+  },
+  {
+    path: "/sluzby/motocykly-bez-omezeni",
+    terms: ["a", "skupina a", "moto bez omezeni", "motocykl", "motorky"],
+  },
+  {
+    path: "/sluzby/kondicni-jizdy",
+    terms: ["kondicni", "kondicni jizdy", "jizdy", "ridit po pauze", "jistota"],
+  },
+  {
+    path: "/sluzby/skoleni-ridicu",
+    terms: ["skoleni", "skoleni ridicu", "referenti", "firma", "firemni"],
+  },
+]
+
+function normalizeSearchText(value) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+}
+
+function findSearchResult(query) {
+  const normalizedQuery = normalizeSearchText(query)
+
+  if (!normalizedQuery) {
+    return null
+  }
+
+  const queryWords = normalizedQuery.split(/\s+/)
+
+  return searchItems
+    .map((item) => {
+      const score = item.terms.reduce((total, term) => {
+        const normalizedTerm = normalizeSearchText(term)
+
+        if (normalizedTerm === normalizedQuery) {
+          return total + 100
+        }
+
+        if (normalizedTerm.includes(normalizedQuery)) {
+          return total + 45
+        }
+
+        if (queryWords.every((word) => normalizedTerm.includes(word))) {
+          return total + 25
+        }
+
+        return total
+      }, 0)
+
+      return { ...item, score }
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score)[0]
+}
 
 export default function UvodPage() {
+  const navigate = useNavigate()
+  const [searchQuery, setSearchQuery] = useState("")
+  const [searchMessage, setSearchMessage] = useState("")
+
+  function handleSearch(event) {
+    event.preventDefault()
+
+    const result = findSearchResult(searchQuery)
+
+    if (!result) {
+      setSearchMessage("Nic jsme nenašli.")
+      return
+    }
+
+    setSearchMessage("")
+    navigate(result.path)
+  }
+
   return (
     <>
-      <section className="hero-section hero-section-compact">
+      <section className="hero-section hero-section-compact home-hero">
         <div className="hero-overlay" />
-        <div className="hero-content">
-          <p className="hero-kicker">Mnichovo Hradiště a okolí</p>
-          <h1>Naučíme vás řídit bezpečně, sebejistě a bez stresu.</h1>
-          <p className="hero-text">
-            Profesionální přístup, klidná výuka a zkušenosti, které vás spolehlivě
-            dovedou k řidičskému oprávnění.
-          </p>
-          <div className="hero-actions">
-            <Link className="primary-button" to="/prihlaska">
-              Přihlásit se
-            </Link>
-            <Link className="secondary-button" to="/sluzby">
-              Zobrazit služby
-            </Link>
-          </div>
+        <div className="hero-content home-hero-content">
+          <h1>
+            Naučíme vás řídit <br />
+            <span>bezpečně a sebejistě.</span>
+          </h1>
+          <form className="hero-search" role="search" onSubmit={handleSearch}>
+            <input
+              type="search"
+              placeholder="Co hledáte? (např. kondiční jízdy)"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+            />
+            <button type="submit">Hledat</button>
+          </form>
+          {searchMessage ? <p className="search-message">{searchMessage}</p> : null}
         </div>
       </section>
 
-      <section className="welcome-card">
-        <div className="section-heading">
+      <section className="welcome-card welcome-card-modern">
+        <div className="welcome-header">
           <div>
-            <p className="eyebrow">Autoškola Jiří Jiráček</p>
-            <h2>Vítejte</h2>
+            <h2>VÍTEJTE</h2>
+            <p>Mnichovo Hradiště & okolí</p>
           </div>
-          <p className="heading-note">v Mnichově Hradišti</p>
+          <Link className="primary-button welcome-cta" to="/prihlaska">
+            Přihláška
+          </Link>
         </div>
 
-        <p className="lead-text">
-          Naše autoškola si vybudovala pověst seriózní firmy s profesionálním a
-          vstřícným přístupem k uchazečům o řidičské oprávnění.
+        <p className="lead-text welcome-lead">
+          Vaše cesta k řidičskému průkazu začíná u nás.
         </p>
         <p className="lead-text">
-          Zajišťujeme výuku všech znalostí a dovedností, které jsou pro získání
-          řidičského průkazu potřeba. Ve výcviku se vám budou věnovat učitelé s
-          nadšením a s klidným přístupem k výuce.
+          Klademe důraz na individuální přístup a klidnou atmosféru. Žádný stres,
+          jen profesionální výcvik v Mnichově Hradišti a okolí.
         </p>
 
         <div className="offer-row">
-          <span>Řidičská oprávnění skupin B, A1, A2, A</span>
-          <span>Intenzivní kurzy</span>
+          <span>Skupiny B, A1, A2, A</span>
+          <span>Intenzivní výcvik</span>
           <span>Kondiční jízdy</span>
           <span>Školení řidičů</span>
-          <span>Možnost splátek</span>
         </div>
       </section>
 
-      <PageIntro eyebrow="Rychlé odkazy" title="Co u nás najdete">
+      <section className="info-section home-services">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Rychlé odkazy</p>
+            <h2>Co u nás najdete</h2>
+          </div>
+        </div>
         <div className="services-grid">
-          {serviceCards.map((service) => (
+          {homeServices.map((service) => (
             <Link
               key={service.slug}
               className="service-tile"
@@ -63,10 +172,30 @@ export default function UvodPage() {
             >
               <span className="service-badge">{service.badge}</span>
               <strong>{service.title}</strong>
+              <span>{service.sub}</span>
             </Link>
           ))}
         </div>
-      </PageIntro>
+      </section>
+
+      <section className="info-section location-map-section">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Kde nás najdete</p>
+            <h2>Mapa</h2>
+          </div>
+          <p className="heading-note">Jaselská 1173, 295 01 Mnichovo Hradiště</p>
+        </div>
+
+        <div className="map-frame">
+          <iframe
+            title="Mapa Autoškoly Jiráček"
+            src="https://maps.google.com/maps?q=Jaselsk%C3%A1%201173%2C%20295%2001%20Mnichovo%20Hradi%C5%A1t%C4%9B&t=&z=16&ie=UTF8&iwloc=&output=embed"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
+      </section>
     </>
   )
 }

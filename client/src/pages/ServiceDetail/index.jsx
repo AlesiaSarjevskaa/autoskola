@@ -15,7 +15,6 @@ export default function ServiceDetailPage() {
       <PageIntro
         eyebrow={`Služba ${service.badge}`}
         title={service.title}
-        note="Detail samostatné služby"
       >
         <p className="lead-text">{service.text}</p>
         <div className="hero-actions">
